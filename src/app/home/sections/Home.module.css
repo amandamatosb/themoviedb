@@ -1,0 +1,37 @@
+.welcome {
+  background-color: #078bc7;
+  color:white;
+  padding-top: 5rem;
+}
+
+.trending {
+  background-color: #ededed;
+}
+
+.trailers {
+  background-color: #04203c;
+  color:white;
+}
+
+.popular {
+  background-color: #ededed;
+}
+
+.join {
+  background-color: #53197c;
+  color:white;
+  display: flex;
+  gap: 3rem;
+}
+
+.leaderbord {
+  background-color: #ededed;
+}
+
+.container h3{
+    width: max-content;
+    font-weight: 600;
+    background-color: #bd8ddd;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    border-radius: 5px;
+}
