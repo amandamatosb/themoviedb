@@ -6,6 +6,28 @@
 
 .trending {
   background-color: #ededed;
+  padding-bottom: 0rem;
+}
+
+.moviecontainer {
+  display: flex;
+  gap: 1.5rem;
+  overflow: hidden;
+  overflow-x: auto;
+  margin-right: 15rem;
+  position: relative;
+  :-webkit-scrollbar {
+  display: none;} 
+}
+
+.fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 3rem;
+  background: linear-gradient(to left, #ededed, transparent);
+
 }
 
 .trailers {
@@ -15,6 +37,7 @@
 
 .popular {
   background-color: #ededed;
+  padding-bottom: 0rem;
 }
 
 .join {

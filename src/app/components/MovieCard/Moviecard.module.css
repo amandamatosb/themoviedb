@@ -1,0 +1,11 @@
+.moviecard img{
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.moviecard {
+    margin-top: 1.5rem;
+    font-size: 0.9em;
+    flex-shrink: 0;
+    margin-bottom: 3rem;
+}
