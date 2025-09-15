@@ -7,5 +7,33 @@
     margin-top: 1.5rem;
     font-size: 0.9em;
     flex-shrink: 0;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.container {
+  width: 150px;
+}
+
+.containerimg {
+    width: 150px;
+    height: 225px;
+    background-color: rgb(209, 208, 208);
+    border-radius: 10px;
+    margin-bottom: 1.2rem;
+    animation: pulse 1.5s infinite;
+}
+
+.container_text {
+    width: 150px;
+    height: 13px;
+    background-color: #ededed
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }

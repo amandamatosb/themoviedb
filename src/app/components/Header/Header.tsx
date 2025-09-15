@@ -1,12 +1,15 @@
 import React from 'react'
 import styles from "./Header.module.css" 
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Header = () => {
   return (
     <header className= {styles.header} >
       <Link href='/.'>
-          <img src="/tmdb_header_icon.svg" alt="" className="w-38 h-auto" />
+        <Image src="/tmdb_header_icon.svg" alt=""
+        width={273.42} height={35.52} 
+        style={{width: '152px', height: 'auto',}}></Image>
       </Link>
       <nav className="space-x-5 font-semibold">
         <Link href='/movies'>Movies</Link>

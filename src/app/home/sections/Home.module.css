@@ -4,31 +4,22 @@
   padding-top: 5rem;
 }
 
-.trending {
-  background-color: #ededed;
-  padding-bottom: 0rem;
-}
-
 .moviecontainer {
   display: flex;
   gap: 1.5rem;
   overflow: hidden;
   overflow-x: auto;
-  margin-right: 15rem;
+  margin-right: 17rem;
   position: relative;
-  :-webkit-scrollbar {
+  ::-webkit-scrollbar {
   display: none;} 
 }
 
-.fade {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 3rem;
-  background: linear-gradient(to left, #ededed, transparent);
-
+.trending {
+  background-color: #ededed;
+  padding-bottom: 0rem;
 }
+
 
 .trailers {
   background-color: #04203c;

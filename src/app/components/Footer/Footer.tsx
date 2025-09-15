@@ -1,13 +1,18 @@
 import React from 'react'
 import styles from "./Footer.module.css"
 import Link from 'next/link'
-
+import Image from 'next/image'
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container_join}>
-        <img src="/tmdb_footer_icon.svg" alt="" className="ml-18 mb-10 w-33 h-auto" />
+        <div className="ml-18 mb-10">
+          <Image src="/tmdb_footer_icon.svg" alt="" 
+          width={185.04} height={133.4}
+          style={{width: '128px', height: 'auto',}}>
+          </Image>
+        </div>
         <Link href="/join">
           <h2>JOIN THE COMMUNITY</h2>
         </Link>
