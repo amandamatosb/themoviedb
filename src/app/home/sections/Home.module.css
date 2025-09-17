@@ -9,7 +9,6 @@
   gap: 1.5rem;
   overflow: hidden;
   overflow-x: auto;
-  margin-right: 17rem;
   position: relative;
   ::-webkit-scrollbar {
   display: none;} 
@@ -20,6 +19,10 @@
   padding-bottom: 0rem;
 }
 
+.title {
+  display: flex;
+  gap: 1rem;
+}
 
 .trailers {
   background-color: #04203c;

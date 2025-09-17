@@ -14,6 +14,10 @@ export const CarouselSkeleton = () => {
         <MovieSkeleton />
         <MovieSkeleton />
         <MovieSkeleton />
+        <MovieSkeleton />
+        <MovieSkeleton />
+        <MovieSkeleton />
+        <MovieSkeleton />
     </div>
   )
 }
