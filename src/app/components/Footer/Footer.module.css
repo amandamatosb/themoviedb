@@ -1,11 +1,21 @@
 .footer{
     background-color: #0d253f;
     color: white;
-    padding: 3rem 18rem 7rem 20rem;
     display: flex;
-    gap: 40px;
+    padding: 5%;
+    gap: 3%;
     justify-content: center;
+    flex-wrap: wrap;
 }
+
+.container_join h2{
+    font-weight: bold;
+    font-size: medium;
+    background-color: #ededed;
+    color: #01b4e4;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    border-radius: 5px;
+    }
 
 .container {
     margin-top: 2rem;
@@ -20,11 +30,3 @@
     font-weight: 300;
 }
 
-.container_join h2{
-    font-weight: bold;
-    font-size: medium;
-    background-color: #ededed;
-    color: #01b4e4;
-    padding: 0.8rem 1rem 0.8rem 1rem;
-    border-radius: 5px;
-}

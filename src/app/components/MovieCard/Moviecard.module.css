@@ -14,6 +14,14 @@
   width: 150px;
 }
 
+.container h3:hover {
+  color: #078bc7;
+}
+
+.container h4:hover {
+  cursor: default;
+}
+
 .containerimg {
     width: 150px;
     height: 225px;
@@ -28,6 +36,7 @@
     height: 13px;
     background-color: #ededed
 }
+
 
 @keyframes pulse {
   0%, 100% {

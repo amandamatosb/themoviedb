@@ -54,23 +54,6 @@ export default function Trending(){
   }, [timeWindow]);
 
   if (error) return <div>{error}</div>;
-  if (loading) return (
-
-    <section className={styles.trending}>
-    
-      <div className={styles.title}>
-        <h2 className="font-semibold text-xl">Trending</h2>
-
-        <div>/Today/</div>
-        <div>/This Week/</div>
-
-      </div>
-
-      <CarouselSkeleton />
-
-    </section>
-
-  );
 
  return (
     <section className={styles.trending}>
@@ -85,25 +68,28 @@ export default function Trending(){
         </button>
       </div>
 
-      <div className={styles.moviecontainer}>
-        {movies.map((movie: Movie) => {
-        
-          if (movie.media_type === 'person' || !movie.poster_path) {return null};
+      {loading ? ( < CarouselSkeleton />)
+      
+      : (
+        <div className={styles.moviecontainer}>
+          {movies.map((movie: Movie) => {
+          
+            if (movie.media_type === 'person' || !movie.poster_path) {return null};
 
-          return(
-            <Moviecard
-              key={movie.id}
-              id={movie.id}
-              title={movie.title || movie.name}
-              poster_path={movie.poster_path}
-              release_date={movie.release_date || movie.first_air_date}
-              media_type={movie.media_type}
-            />
-          );
+            return(
+              <Moviecard
+                key={movie.id}
+                id={movie.id}
+                title={movie.title || movie.name}
+                poster_path={movie.poster_path}
+                release_date={movie.release_date || movie.first_air_date}
+                media_type={movie.media_type}
+              />
+            );
 
-        })}
-
-      </div>
+          })}
+        </div> 
+      )}
     </section>
   );
 }

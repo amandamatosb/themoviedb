@@ -9,3 +9,8 @@ export type Movie = {
   first_air_date?: string;
   media_type: 'movie' | 'tv' | 'person';
 };
+
+export type Genre = {
+  id: number;
+  name: string;
+}

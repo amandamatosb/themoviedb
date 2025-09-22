@@ -15,14 +15,16 @@ export default function Popular(){
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const type = activeTab === 'on-tv' ? 'tv' : 'movie';
+
   useEffect(() => {
-      
+    
     const fetchPopular = async () => {
       setLoading(true);
       setError(null);
 
       let url = '';
-
+      
       switch(activeTab) {
         case 'streaming':
           url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_watch_monetization_types=flatrate';
@@ -73,30 +75,12 @@ export default function Popular(){
   }, [activeTab]);
 
   if (error) return <div>{error}</div>;
-	if (loading) return (
-		<section className={styles.popular}>
-
-			<div className={styles.title}>
-				<h2 className="font-semibold text-xl">What's Popular</h2>
-
-				<div>/Streaming/</div>
-				<div>/On Tv/</div>
-				<div>/For Rent/</div>
-				<div>/In Theaters/</div>
-
-			</div>
-
-			<CarouselSkeleton />
-
-		</section> 
-
-	);
 
   return (
     <section className={styles.popular}>
     
       <div className={styles.title}>
-        <h2 className="font-semibold text-xl">Popular</h2>
+        <h2 className="font-semibold text-xl">What's Popular</h2>
         <button onClick={() => setActiveTab('streaming')} className={activeTab === 'streaming' ? 'active' : ''}>
           /Streaming/
         </button>
@@ -111,23 +95,29 @@ export default function Popular(){
         </button>
       </div>
 
-      <div className={styles.moviecontainer}>
-        {movies.map((movie: Movie) => {
+      {loading ? (<CarouselSkeleton />) 
+      
+      : (
+        <div className={styles.moviecontainer}>
+          {movies.map((movie: Movie) => {
 
-          return(
-            <Moviecard
-            key={movie.id}
-            id={movie.id}
-            title={movie.title || movie.name}
-            poster_path={movie.poster_path}
-            release_date={movie.release_date || movie.first_air_date}
-            media_type={movie.media_type}
-            />
-          );
+            if (movie.media_type === 'person' || !movie.poster_path) {return null};
 
-        })}
+            return(
+              <Moviecard
+                key={movie.id}
+                id={movie.id}
+                title={movie.title || movie.name}
+                poster_path={movie.poster_path}
+                release_date={movie.release_date || movie.first_air_date}
+                media_type={type}
+              />
+            );
 
-      </div>
+          })}
+
+        </div>
+      )}
     </section>
     );
 }

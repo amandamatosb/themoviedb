@@ -11,7 +11,7 @@ const Header = () => {
         width={273.42} height={35.52} 
         style={{width: '152px', height: 'auto',}}></Image>
       </Link>
-      <nav className="space-x-5 font-semibold">
+      <nav className="space-x-5 font-semibold flex flex-wrap">
         <Link href='/movies'>Movies</Link>
         <Link href='/tvshows'>TV Shows</Link>
         <Link href='/people'>People</Link>

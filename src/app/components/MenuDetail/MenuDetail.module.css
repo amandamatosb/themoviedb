@@ -1,0 +1,7 @@
+.menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 1%;
+}

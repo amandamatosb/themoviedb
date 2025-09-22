@@ -14,13 +14,14 @@ export default function FreeWatch(){
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
+  	const type = timeWindow === 'tv' ? 'tv' : 'movie';
+
+
 	useEffect(() => {
 			
 		const fetchFreeWatch = async () => {
 			setLoading(true);
 			setError(null);
-
-			const today = new Date().toISOString().split('T')[0]
 
 			const url = `https://api.themoviedb.org/3/discover/${timeWindow}?include_adult=false&with_watch_monetization_types=free&primary_release_date.lte=2025-09-17&sort_by=vote_average.desc&vote_count.gte=1000`;
 			const options = {
@@ -60,22 +61,6 @@ export default function FreeWatch(){
 	}, [timeWindow]);
 
 	if (error) return <div>{error}</div>;
-	if (loading) return (
-		<section className={styles.popular}>
-
-			<div className={styles.title}>
-				<h2 className="font-semibold text-xl">Free To Watch</h2>
-
-				<div>/Movies/</div>
-				<div>/Tv/</div>
-
-			</div>
-
-			<CarouselSkeleton />
-
-		</section> 
-
-	);
 
 	return (
 		<section className={styles.popular}>
@@ -90,6 +75,9 @@ export default function FreeWatch(){
 				</button>
 			</div>
 
+		{loading ? (<CarouselSkeleton />)
+
+		: (
 			<div className={styles.moviecontainer}>
 				{movies.map((movie: Movie) => {
 
@@ -100,13 +88,14 @@ export default function FreeWatch(){
 						title={movie.title || movie.name}
 						poster_path={movie.poster_path}
 						release_date={movie.release_date || movie.first_air_date}
-						media_type={movie.media_type}
+						media_type={type}
 						/>
 					);
 
 				})}
 
 			</div>
+		)}
 		</section>
 	);
 }
