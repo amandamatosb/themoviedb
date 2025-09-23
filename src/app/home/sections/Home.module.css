@@ -1,7 +1,7 @@
 .welcome {
   background-color: #078bc7;
   color:white;
-  padding-top: 5rem;
+  padding: 5rem 3rem 5rem 3rem;
 }
 
 .moviecontainer {
@@ -16,7 +16,7 @@
 
 .trending {
   background-color: #ededed;
-  padding-bottom: 0rem;
+  padding: 2rem 3rem 0rem 3rem;
 }
 
 .title {
@@ -27,11 +27,12 @@
 .trailers {
   background-color: #04203c;
   color:white;
+  padding: 2rem 3rem 5rem 3rem;
 }
 
 .popular {
   background-color: #ededed;
-  padding-bottom: 0rem;
+  padding: 2rem 3rem 0rem 3rem;
 }
 
 .join {
@@ -39,10 +40,12 @@
   color:white;
   display: flex;
   gap: 3rem;
+  padding: 2rem 3rem 5rem 3rem;
 }
 
 .leaderbord {
   background-color: #ededed;
+  padding: 2rem 3rem 5rem 3rem;
 }
 
 .container h3{

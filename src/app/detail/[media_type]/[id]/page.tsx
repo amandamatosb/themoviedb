@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import styles from './detail.module.scss'
 import { Genre } from 'app/types'
-import { MenuDetail } from 'app/components/MenuDetail/MenuDetail';
+import { MenuDetail } from 'app/components/details/MenuDetail/MenuDetail';
+import { Media } from 'app/components/details/Media/Media';
 
 export default async function detailPage ({ params } : { params : {id: string, media_type: 'movie' | 'tv' | 'person'}} ) {
   const id = params.id;
@@ -79,7 +80,8 @@ export default async function detailPage ({ params } : { params : {id: string, m
         </div>
       </section>
 
-      <section>
+      <section className={styles.section_info}>
+        <div className={styles.container_cast}>
           <h2 className={styles.title_cast}>Top Billed Cast</h2>
           <div className={styles.people}>
             {data_credits.cast.slice(0,10).map((actor: any) => (
@@ -100,6 +102,11 @@ export default async function detailPage ({ params } : { params : {id: string, m
               </div>
               ))} 
           </div>
+        </div>
+      </section>
+
+      <section className={styles.section_info}>
+        <Media id={params.id} media_type={params.media_type} />
       </section>
 
       </>

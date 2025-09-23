@@ -1,0 +1,51 @@
+.media {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 2%;
+
+    h1 {
+        padding-bottom: 2%;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    width: 90vw;
+}
+
+.tabmedia {
+    flex: 1;
+    min-width: 0;
+}
+
+.tab {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: auto;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tab >* {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+}
+
+.videoname {
+    padding-top: 5px;
+}
+
+.videocard {
+    width: 320px;
+    padding-left: 15px;
+}
+
+.videocard:hover {
+    color: #045479;
+    gap: 10px;
+}
+
+.backdrop {
+    height: 180;
+}
