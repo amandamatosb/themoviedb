@@ -93,10 +93,10 @@ export function Media ({id, media_type} : {id: string; media_type: string})
     <div className={styles.tabmedia}>
 
       <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as MediaTab)}>
-        <TabsList>
-          <TabsTrigger value="videos">Videos</TabsTrigger>
-          <TabsTrigger value="backdrops">Backdrops</TabsTrigger>
-          <TabsTrigger value="posters">Posters</TabsTrigger>
+        <TabsList className="bg-transparent">
+          <TabsTrigger value="videos" className= "data-[state=active]:bg-[#e7e7e7]">Videos</TabsTrigger>
+          <TabsTrigger value="backdrops" className= "data-[state=active]:bg-[#e7e7e7]">Backdrops</TabsTrigger>
+          <TabsTrigger value="posters" className= "data-[state=active]:bg-[#e7e7e7]">Posters</TabsTrigger>
         </TabsList>
 
         {!loading && !error && (

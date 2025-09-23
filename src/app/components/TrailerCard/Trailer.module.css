@@ -10,31 +10,19 @@
     margin-bottom: 1.5rem;
 }
 
-.container {
-  width: 150px;
-}
-
-.container h3:hover {
-  color: #078bc7;
-}
-
-.container h4:hover {
-  cursor: default;
-}
-
-.containerimg {
-    width: 150px;
-    height: 225px;
+.containerimg_trailer {
+    width: 310px;
+    height: 174.14px;
     background-color: rgb(209, 208, 208);
     border-radius: 10px;
     margin-bottom: 1.2rem;
     animation: pulse 1.5s infinite;
 }
 
-.container_text {
+.containertext_trailer {
     width: 150px;
     height: 13px;
-    background-color: #ededed
+    background-color: #04203c
 }
 
 @keyframes pulse {

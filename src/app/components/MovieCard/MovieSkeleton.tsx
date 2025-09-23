@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from "./Moviecard.module.css" 
-import Image from 'next/image'
 
 const MovieSkeleton = () => {
   return (

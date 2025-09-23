@@ -6,6 +6,9 @@ import {useState, useEffect} from 'react'
 import Moviecard from 'app/components/MovieCard/Moviecard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+type FreeTab = 'tv' | 'movie';
 
 export default function FreeWatch(){
 
@@ -15,7 +18,6 @@ export default function FreeWatch(){
 	const [error, setError] = useState<string | null>(null);
 
   	const type = timeWindow === 'tv' ? 'tv' : 'movie';
-
 
 	useEffect(() => {
 			
@@ -67,12 +69,15 @@ export default function FreeWatch(){
 		
 			<div className={styles.title}>
 				<h2 className="font-semibold text-xl">Free To Watch</h2>
-				<button onClick={() => setTimeWindow('movie')} className={timeWindow === 'movie' ? 'active' : ''}>
-					/Movies/
-				</button>
-				<button onClick={() => setTimeWindow('tv')} className={timeWindow === 'tv' ? 'active' : ''}> 
-					/Tv/
-				</button>
+
+				<Tabs value={timeWindow} onValueChange={(value) => setTimeWindow(value as FreeTab)} >
+					<TabsList className="bg-transparent">
+					<TabsTrigger value="movie" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">Movies</TabsTrigger>
+					<TabsTrigger value="tv" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">Tv</TabsTrigger>
+					</TabsList>
+				
+				</Tabs>
+
 			</div>
 
 		{loading ? (<CarouselSkeleton />)

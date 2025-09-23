@@ -6,6 +6,7 @@ import styles from './Home.module.css'
 import Moviecard from 'app/components/MovieCard/Moviecard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 type PopularTab = 'streaming' | 'on-tv' | 'for-rent' | 'in-theater';
 
@@ -27,7 +28,7 @@ export default function Popular(){
       
       switch(activeTab) {
         case 'streaming':
-          url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_watch_monetization_types=flatrate';
+          url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc';
           break;
         case 'on-tv':
           url = 'https://api.themoviedb.org/3/tv/on_the_air?page=1';
@@ -81,19 +82,20 @@ export default function Popular(){
     
       <div className={styles.title}>
         <h2 className="font-semibold text-xl">What's Popular</h2>
-        <button onClick={() => setActiveTab('streaming')} className={activeTab === 'streaming' ? 'active' : ''}>
-          /Streaming/
-        </button>
-        <button onClick={() => setActiveTab('on-tv')} className={activeTab === 'on-tv' ? 'active' : ''}>
-          /On Tv/
-        </button>
-        <button onClick={() => setActiveTab('for-rent')} className={activeTab === 'for-rent' ? 'active' : ''}>
-          /For Rent/
-        </button>
-        <button onClick={() => setActiveTab('in-theater')} className={activeTab === 'in-theater' ? 'active' : ''}>
-          /In Theaters/
-        </button>
+
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as PopularTab)}>
+            <TabsList className="bg-transparent">
+              <TabsTrigger value="streaming" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">Streaming</TabsTrigger>
+              <TabsTrigger value="on-tv" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">On Tv</TabsTrigger>
+              <TabsTrigger value="for-rent" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">For rent</TabsTrigger>
+              <TabsTrigger value="in-theater" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">In Theaters</TabsTrigger>
+            </TabsList>
+        
+        </Tabs>
+
       </div>
+
+      
 
       {loading ? (<CarouselSkeleton />) 
       

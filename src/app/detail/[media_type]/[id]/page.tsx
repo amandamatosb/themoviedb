@@ -42,7 +42,7 @@ export default async function detailPage ({ params } : { params : {id: string, m
           <div className={styles.container}>
             <div className={styles.image}>
               <Image src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
-                    alt={`Pôster de ${data.title || data.name}`}
+                    alt={`${data.title || data.name}`}
                     width={300}
                     height={450}
                     style={{borderRadius: '10px', objectFit: 'cover'}}>

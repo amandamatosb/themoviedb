@@ -22,12 +22,13 @@
 .title {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .trailers {
   background-color: #04203c;
   color:white;
-  padding: 2rem 3rem 5rem 3rem;
+  padding: 2rem 3rem 0rem 3rem;
 }
 
 .popular {
@@ -59,4 +60,28 @@
 .title button:hover{
   cursor: pointer;
   font-weight: bold;
+}
+
+.tab {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  overflow-x: auto;
+  border-radius: 10px;
+  position: relative;
+}
+
+.tab >* {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+
+.videocard {
+  width: 315px;
+}
+
+.videocard:hover {
+  color: #4c8099;
+  gap: 10px;
 }

@@ -6,10 +6,13 @@ import styles from './Home.module.css'
 import Moviecard from 'app/components/MovieCard/Moviecard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+type TrendTab = 'day' | 'week';
 
 export default function Trending(){
 
-  const [timeWindow, setTimeWindow] = useState('day');
+  const [timeWindow, setTimeWindow] = useState<TrendTab>('day');
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -60,13 +63,17 @@ export default function Trending(){
     
       <div className={styles.title}>
         <h2 className="font-semibold text-xl">Trending</h2>
-        <button onClick={() => setTimeWindow('day')} className={timeWindow === 'day' ? 'active' : ''}>
-          /Today/
-        </button>
-        <button onClick={() => setTimeWindow('week')} className={timeWindow === 'week' ? 'active' : ''}> 
-        /This Week/
-        </button>
-      </div>
+      
+        <Tabs value={timeWindow} onValueChange={(value) => setTimeWindow(value as TrendTab)} >
+          <TabsList className="bg-transparent">
+            <TabsTrigger value="day" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">Today</TabsTrigger>
+            <TabsTrigger value="week" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">This Week</TabsTrigger>
+          </TabsList>
+
+
+        </Tabs>
+
+    </div>
 
       {loading ? ( < CarouselSkeleton />)
       
