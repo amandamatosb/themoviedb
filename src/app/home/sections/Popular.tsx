@@ -3,77 +3,39 @@
 import {useState, useEffect} from 'react'
 import React from 'react'
 import styles from './Home.module.css'
-import Moviecard from 'app/components/MovieCard/Moviecard'
+import MovieCard from 'app/components/MovieCard/MovieCard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {Api} from 'app/hooks/Api'
 
 type PopularTab = 'streaming' | 'on-tv' | 'for-rent' | 'in-theater';
 
 export default function Popular(){
   const [activeTab, setActiveTab] = useState<PopularTab>('streaming');
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const type = activeTab === 'on-tv' ? 'tv' : 'movie';
 
-  useEffect(() => {
-    
-    const fetchPopular = async () => {
-      setLoading(true);
-      setError(null);
-
-      let url = '';
+  let url = '';
       
-      switch(activeTab) {
-        case 'streaming':
-          url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc';
-          break;
-        case 'on-tv':
-          url = 'https://api.themoviedb.org/3/tv/on_the_air?page=1';
-          break;
-        case 'for-rent':
-          url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&with_watch_monetization_types=rent';
-          break;
-        case 'in-theater':
-          url = 'https://api.themoviedb.org/3/movie/now_playing?page=1';
-          break;
-        default: 
-          url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_watch_monetization_types=flatrate';
-      }
-    
-      const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGMxYzFiZDU3MzY2NTgyNjNjMzc0MWFiZmY1NGJmNCIsIm5iZiI6MTc1NzUyNzg0Mi4wNTksInN1YiI6IjY4YzFiZjIyYjRiNDc0MDAwYzFmNjNkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-Ir2TNtVmhW7IZR00ChUh7Y_JeZoy7-V71jE61mLRio'
-        }
-      };
+  switch(activeTab) {
+    case 'streaming':
+      url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc';
+      break;
+    case 'on-tv':
+      url = 'https://api.themoviedb.org/3/tv/on_the_air?page=1';
+      break;
+    case 'for-rent':
+      url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&&with_watch_monetization_types=rent';
+      break;
+    case 'in-theater':
+      url = 'https://api.themoviedb.org/3/movie/now_playing?page=1';
+      break;
+    default: 
+      url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_watch_monetization_types=flatrate';
+  }
 
-      try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-            throw new Error('Falha na resposta da API');
-        }
-        const data = await response.json();
-        
-        setMovies(data.results);
-      }
-
-      catch (err) {
-        setError('Falha ao carregar.');
-        console.error(err);
-      }
-
-      finally{
-        setLoading(false);
-      }
-    } 
-
-    fetchPopular();
-
-  }, [activeTab]);
+  const {data: movies, loading, error } = Api(url);
 
   if (error) return <div>{error}</div>;
 
@@ -95,18 +57,14 @@ export default function Popular(){
 
       </div>
 
-      
-
       {loading ? (<CarouselSkeleton />) 
       
       : (
         <div className={styles.moviecontainer}>
           {movies.map((movie: Movie) => {
 
-            if (movie.media_type === 'person' || !movie.poster_path) {return null};
-
             return(
-              <Moviecard
+              <MovieCard
                 key={movie.id}
                 id={movie.id}
                 title={movie.title || movie.name}
@@ -115,11 +73,11 @@ export default function Popular(){
                 media_type={type}
               />
             );
-
+            
           })}
-
         </div>
       )}
+      
     </section>
     );
 }

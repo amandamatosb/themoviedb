@@ -3,64 +3,21 @@
 import React, { use } from 'react'
 import styles from './Home.module.css'
 import {useState, useEffect} from 'react'
-import Moviecard from 'app/components/MovieCard/Moviecard'
+import MovieCard from 'app/components/MovieCard/MovieCard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Api } from 'app/hooks/Api'
 
 type FreeTab = 'tv' | 'movie';
 
 export default function FreeWatch(){
-
 	const [timeWindow, setTimeWindow] = useState('movie');
-	const [movies, setMovies] = useState<Movie[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
 
-  	const type = timeWindow === 'tv' ? 'tv' : 'movie';
-
-	useEffect(() => {
-			
-		const fetchFreeWatch = async () => {
-			setLoading(true);
-			setError(null);
-
-			const url = `https://api.themoviedb.org/3/discover/${timeWindow}?include_adult=false&with_watch_monetization_types=free&primary_release_date.lte=2025-09-17&sort_by=vote_average.desc&vote_count.gte=1000`;
-			const options = {
-				method: 'GET',
-				headers: {
-				accept: 'application/json',
-				Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGMxYzFiZDU3MzY2NTgyNjNjMzc0MWFiZmY1NGJmNCIsIm5iZiI6MTc1NzUyNzg0Mi4wNTksInN1YiI6IjY4YzFiZjIyYjRiNDc0MDAwYzFmNjNkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-Ir2TNtVmhW7IZR00ChUh7Y_JeZoy7-V71jE61mLRio'
-				}
-			};
-
-			try {
-				const response = await fetch(url, options);
-				if(!response.ok){
-					throw new Error('Falha na resposta da API');
-				}
-
-				const data = await response.json();
-
-				setMovies(data.results);
-			}
-
-			catch(err) {
-				setError('Falha ao carregar.')
-				console.error(err);
-			}
-
-			finally {
-				setLoading(false);
-			}
-
-			}
-		
-		fetchFreeWatch();   
-
-
-
-	}, [timeWindow]);
+  const type = timeWindow === 'tv' ? 'tv' : 'movie';
+	const url = `https://api.themoviedb.org/3/discover/${timeWindow}?include_adult=false&with_watch_monetization_types=free&primary_release_date.lte=2025-09-17&sort_by=vote_average.desc&vote_count.gte=1000`;
+	
+  const {data: movies, loading, error } = Api(url);
 
 	if (error) return <div>{error}</div>;
 
@@ -75,7 +32,6 @@ export default function FreeWatch(){
 					<TabsTrigger value="movie" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">Movies</TabsTrigger>
 					<TabsTrigger value="tv" className="data-[state=active]:bg-[#04203c] data-[state=active]:text-white">Tv</TabsTrigger>
 					</TabsList>
-				
 				</Tabs>
 
 			</div>
@@ -87,7 +43,7 @@ export default function FreeWatch(){
 				{movies.map((movie: Movie) => {
 
 					return(
-						<Moviecard
+						<MovieCard
 						key={movie.id}
 						id={movie.id}
 						title={movie.title || movie.name}
@@ -104,5 +60,3 @@ export default function FreeWatch(){
 		</section>
 	);
 }
-
-

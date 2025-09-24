@@ -11,8 +11,9 @@ type MediaTab = 'videos' | 'backdrops' | 'posters';
 
 type Media = {
     file_path: string;
-    vote_count: number;
 };
+
+const key = process.env.NEXT_PUBLIC_API_KEY;
 
 export function Media ({id, media_type} : {id: string; media_type: string})
 {
@@ -46,7 +47,7 @@ export function Media ({id, media_type} : {id: string; media_type: string})
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGMxYzFiZDU3MzY2NTgyNjNjMzc0MWFiZmY1NGJmNCIsIm5iZiI6MTc1NzUyNzg0Mi4wNTksInN1YiI6IjY4YzFiZjIyYjRiNDc0MDAwYzFmNjNkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-Ir2TNtVmhW7IZR00ChUh7Y_JeZoy7-V71jE61mLRio'
+              Authorization: `Bearer ${key}`
             }
           };
     

@@ -1,0 +1,70 @@
+.tabreview {
+    flex: 1;
+    min-width: 0;
+}
+
+.social {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 2%;
+
+    h1 {
+        padding-bottom: 2%;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    width: 90vw;
+    min-height: 20vh;
+    overflow: hidden;
+}
+
+.author {
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 20px;
+}
+
+.tab {
+    position: relative;
+}
+
+.more {
+    font-weight: bolder;
+    padding: 2rem 0rem 0rem 5rem;
+}
+
+.more:hover {
+    color: #929292;
+}
+
+.rating {
+    display: flex;
+    background-color: #04203c;
+    border-radius: 5px;
+    color: white;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+    font-size: smaller;
+}
+
+.desc {
+    color: grey;
+    font-size: smaller;
+}
+
+.sub {
+    display: flex;
+    gap: 5px;
+    padding: 2px 0px 5px 5px;
+}
+
+.content {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

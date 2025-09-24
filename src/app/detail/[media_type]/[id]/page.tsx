@@ -1,32 +1,36 @@
 import Image from 'next/image'
-import styles from './detail.module.scss'
+import styles from './Detail.module.scss'
 import { Genre } from 'app/types'
-import { MenuDetail } from 'app/components/details/MenuDetail/MenuDetail';
-import { Media } from 'app/components/details/Media/Media';
+import { MenuDetail } from 'app/components/DetailsMedia/MenuDetail/MenuDetail';
+import { Media } from 'app/components/DetailsMedia/Media/Media';
+import { Review } from 'app/components/DetailsMedia/Review/Review';
+import formatDate from 'app/utils';
+import { Api } from 'app/hooks/Api';
+import Credits from 'app/components/DetailsMedia/Credits/Credits';
+
+const key = process.env.NEXT_PUBLIC_API_KEY;
 
 export default async function detailPage ({ params } : { params : {id: string, media_type: 'movie' | 'tv' | 'person'}} ) {
-  const id = params.id;
-  const type = params.media_type;
+  const { id, media_type } = await params;
 
-  const url = `https://api.themoviedb.org/3/${type}/${id}`;
-  const url_credits =  `https://api.themoviedb.org/3/${type}/${id}/credits`;
+  const url = `https://api.themoviedb.org/3/${media_type}/${id}`;
+  
   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGMxYzFiZDU3MzY2NTgyNjNjMzc0MWFiZmY1NGJmNCIsIm5iZiI6MTc1NzUyNzg0Mi4wNTksInN1YiI6IjY4YzFiZjIyYjRiNDc0MDAwYzFmNjNkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-Ir2TNtVmhW7IZR00ChUh7Y_JeZoy7-V71jE61mLRio'
+      Authorization: `Bearer ${key}`
     }
   }
 
   try {
     const response = await fetch(url, options);
-    const response_credits = await fetch(url_credits, options);
-    if (!response.ok || !response_credits.ok) {
+    if (!response.ok) {
             throw new Error('Falha na resposta da API');
         }
 
     const data = await response.json();
-    const data_credits = await response_credits.json();
+
     const background = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
 
     return (
@@ -56,14 +60,14 @@ export default async function detailPage ({ params } : { params : {id: string, m
               </div>
 
               <div className={styles.subtitle}>
-                { type === 'movie' && 
-                <p>{data.release_date || data.first_air_date}</p>}
+                { media_type === 'movie' && 
+                <p>{formatDate(data.release_date) || formatDate(data.first_air_date)}</p>}
                 <div>
                   {data.genres.map((genre: Genre) => (
                     <span key={genre.id}> {genre.name} </span>
                   ))} 
                 </div>
-                { type === 'movie' && 
+                { media_type === 'movie' && 
                 <div> {Math.floor(data.runtime / 60)}h {data.runtime % 60}m </div>}
               </div>
 
@@ -81,32 +85,15 @@ export default async function detailPage ({ params } : { params : {id: string, m
       </section>
 
       <section className={styles.section_info}>
-        <div className={styles.container_cast}>
-          <h2 className={styles.title_cast}>Top Billed Cast</h2>
-          <div className={styles.people}>
-            {data_credits.cast.slice(0,10).map((actor: any) => (
-              <div  key={actor.id} className={styles.card}>
-                <Image src = {`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                        alt={actor.name}
-                        width={140}
-                        height={210}
-                        className={styles.imgcast}
-                        >
-                </Image>
-
-                <div className={styles.info}>
-                  <p style={{fontSize: 'smaller', fontWeight: 'bold'}}>{actor.name}</p>
-                  <p style={{fontSize: 'small'}}>{actor.character}</p>
-                </div>
-
-              </div>
-              ))} 
-          </div>
-        </div>
+        <Credits id={id} media_type={media_type} />
       </section>
 
       <section className={styles.section_info}>
-        <Media id={params.id} media_type={params.media_type} />
+        <Review id={id} media_type={media_type} />
+      </section>
+
+      <section className={styles.section_info}>
+        <Media id={id} media_type={media_type} />
       </section>
 
       </>

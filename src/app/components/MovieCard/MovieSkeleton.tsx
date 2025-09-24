@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./Moviecard.module.css" 
+import styles from "./MovieCard.module.css" 
 
 const MovieSkeleton = () => {
   return (

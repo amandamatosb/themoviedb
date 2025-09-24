@@ -1,17 +1,8 @@
 import React from 'react'
-import styles from "./Moviecard.module.css" 
+import styles from "./MovieCard.module.css" 
 import Image from 'next/image'
 import Link from 'next/link'
-import {format, parseISO} from 'date-fns'
-import { enUS } from 'date-fns/locale'
-
-const formatDate = (dateString: string | undefined) => {
-  if(!dateString) return '';
-
-  const data = parseISO(dateString);
-
-  return format(data, 'MMM dd, yyyy', {locale: enUS});
-}
+import formatDate from 'app/utils'
 
 interface MovieCardProps {
   id: number;
