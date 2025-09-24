@@ -11,6 +11,7 @@ import ButtonFavorite from 'app/components/ButtonFavorites/ButtonFavorite';
 import Link from  'next/link';
 
 const key = process.env.NEXT_PUBLIC_API_KEY;
+const lang = new Intl.DisplayNames(["en"], {type: "language"})
 
 export default async function detailPage ({ params } : { params : {id: string, media_type: 'movie' | 'tv' | 'person'}} ) {
   const { id, media_type } = await params;
@@ -27,6 +28,7 @@ export default async function detailPage ({ params } : { params : {id: string, m
 
   try {
     const response = await fetch(url, options);
+    
     if (!response.ok) {
             throw new Error('Falha na resposta da API');
         }
@@ -36,12 +38,17 @@ export default async function detailPage ({ params } : { params : {id: string, m
     const background = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
  
     const trailer_url = `${url}/videos`;
+    const keyword_url = `${url}/keywords`;
 
     const response_trailer = await fetch(trailer_url, options);
-    if (!response_trailer.ok) {
+    const response_keyword = await fetch(keyword_url, options);
+
+    if (!response_trailer.ok || !response_keyword.ok) {
         throw new Error('Falha na resposta da API');
     }
+
     const trailer_data = await response_trailer.json();
+    const keyword_data = await response_keyword.json();
 
     const trailer = trailer_data.results.find((v: any) => v.type === 'Trailer' && v.site === 'YouTube');
 
@@ -119,19 +126,64 @@ export default async function detailPage ({ params } : { params : {id: string, m
     
         </div>
       </section>
+                
+      <div className={styles.layout}>
+        <main className={styles.contmain}>
+          <section className={styles.section_info}>
+          <Credits id={id} media_type={media_type} />
+          </section>
 
-      <section className={styles.section_info}>
-        <Credits id={id} media_type={media_type} />
-      </section>
-
-      <section className={styles.section_info}>
-        <Review id={id} media_type={media_type} />
-      </section>
+          <section className={styles.section_info}>
+            <Review id={id} media_type={media_type} />
+          </section>
 
 
-      <section className={styles.section_info}>
-        <Media id={id} media_type={media_type} />
-      </section>
+          <section className={styles.section_info}>
+            <Media id={id} media_type={media_type} />
+          </section>
+        </main>
+
+        <aside className={styles.contaside}>
+          <section className={styles.section_info}>
+          <div  className={styles.infos}>
+            <h1>Facts</h1>
+            <h2>Status</h2>
+            <p>{data.status}</p>
+            <h2>Original Language</h2>
+            <p>{lang.of(data.original_language)}</p>
+            { data.budget > 0 &&
+              (
+                <div>
+                  <h2>Budget</h2>
+                  <p>{data.budget.toLocaleString("en-US", {style: "currency", currency: "USD"})}</p>
+                </div>
+              )          
+            }
+            { data.revenue > 0 &&
+              (
+                <div>
+                  <h2>Revenue</h2>
+                  <p>{data.revenue.toLocaleString("en-US", {style: "currency", currency: "USD"})}</p>
+                </div>
+              )          
+            }
+            {
+              keyword_data.keywords && keyword_data.keywords.length > 0 && 
+              (
+                <div>
+                  <h2>Keywords</h2>
+                  <div className={styles.keys}>
+                    {keyword_data.keywords.map((keyword : Genre) => (
+                      <div key={keyword.id} className={styles.key}>{keyword.name}</div>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </section>
+        </aside>
+      </div>
 
       </>
 

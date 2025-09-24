@@ -7,3 +7,9 @@
     gap: 20px;
 }
 
+.bar {
+    gap: 1.25rem;
+    display: flex;
+    width: 50vw;
+    min-width: 0;
+}

@@ -82,7 +82,8 @@ export function Review ({id, media_type} : {id: string; media_type: string})
         {!loading && !error && (
           <> 
             <TabsContent value="reviews">
-                {results.length > 0 && (
+                {results.length > 0 
+                ? (
                 <div className={styles.tab}>
                   {results.slice(0, 1).map(review => (
                     <div key={review.id}>
@@ -103,21 +104,23 @@ export function Review ({id, media_type} : {id: string; media_type: string})
                     </div>
                   ))}
                 </div>
-                )}
+                )
+
+                : (
+                  <div className={styles.content}>{`We don't have any reviews.`}</div>
+                )
+              }
             </TabsContent>
 
           <TabsContent value="discussions">
-            {results.length > 0 && (
-              <div>
+            <div>
                 <div className={styles.author}>
                     Sem discussões
                 </div>
                 <div className={styles.content}>
                 Não tem como buscar discussões pela API do TMDb
                 </div>
-              </div>
-                
-            )}
+            </div>
 
           </TabsContent>
 

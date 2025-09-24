@@ -13,9 +13,7 @@ const Footer = () => {
           style={{width: '128px', height: 'auto',}}>
           </Image>
         </div>
-        <Link href="/join">
-          <h2>JOIN THE COMMUNITY</h2>
-        </Link>
+        <h2>JOIN THE COMMUNITY</h2>
       </div>
       <div className={styles.container}>
         <h2>THE BASICS</h2>

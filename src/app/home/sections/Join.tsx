@@ -11,9 +11,7 @@ const Join = () => {
           track what you've seen and search and filter for what to watch next—regardless if it's in theatres, 
           on TV or available on popular streaming services like Disney Plus, Netflix, Amazon Prime Video, 
           Claro video, and Looke.</p>
-          <Link href="/join">
-            <h3>Sign Up</h3>
-          </Link>
+          <h3>Sign Up</h3>
         </div>
         <div className="mt-13 text-gray-300">
           <ul className="list-disc">
