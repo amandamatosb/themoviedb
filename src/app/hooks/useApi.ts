@@ -3,7 +3,7 @@ const key = process.env.NEXT_PUBLIC_API_KEY;
 import {useState, useEffect} from 'react'
 import type { Movie } from 'app/types';
 
-export function Api(url: string){
+export function useApi(url: string){
 
   const [data, setData] =  useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);

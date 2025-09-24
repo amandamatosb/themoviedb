@@ -7,7 +7,7 @@ import MovieCard from 'app/components/MovieCard/MovieCard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Api } from 'app/hooks/Api'
+import { useApi } from 'app/hooks/useApi'
 
 type FreeTab = 'tv' | 'movie';
 
@@ -17,7 +17,7 @@ export default function FreeWatch(){
   const type = timeWindow === 'tv' ? 'tv' : 'movie';
 	const url = `https://api.themoviedb.org/3/discover/${timeWindow}?include_adult=false&with_watch_monetization_types=free&primary_release_date.lte=2025-09-17&sort_by=vote_average.desc&vote_count.gte=1000`;
 	
-  const {data: movies, loading, error } = Api(url);
+  const {data: movies, loading, error } = useApi(url);
 
 	if (error) return <div>{error}</div>;
 

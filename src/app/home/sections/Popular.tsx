@@ -7,7 +7,7 @@ import MovieCard from 'app/components/MovieCard/MovieCard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {Api} from 'app/hooks/Api'
+import {useApi} from 'app/hooks/useApi'
 
 type PopularTab = 'streaming' | 'on-tv' | 'for-rent' | 'in-theater';
 
@@ -35,7 +35,7 @@ export default function Popular(){
       url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_watch_monetization_types=flatrate';
   }
 
-  const {data: movies, loading, error } = Api(url);
+  const {data: movies, loading, error } = useApi(url);
 
   if (error) return <div>{error}</div>;
 

@@ -7,6 +7,7 @@ import { Review } from 'app/components/DetailsMedia/Review/Review';
 import formatDate from 'app/utils';
 import Credits from 'app/components/DetailsMedia/Credits/Credits';
 import VoteProgressBar from 'app/components/VoteProgressBar/VoteProgressBar';
+import ButtonFavorite from 'app/components/ButtonFavorites/ButtonFavorite';
 import Link from  'next/link';
 
 const key = process.env.NEXT_PUBLIC_API_KEY;
@@ -95,9 +96,11 @@ export default async function detailPage ({ params } : { params : {id: string, m
             </div>
 
               <div className={styles.buttons}>
-                <Image src="/list.svg" width={30} height={30} alt="List"/>
-                <Image src="/heart.svg" width={30} height={30} alt="Favorite"/>
-                <Image src="/save.svg" width={30} height={30} alt="Save"/>
+                <div className={styles.buttonsgroup}>
+                  <Image src="/list.svg" width={30} height={30} alt="List"/>
+                  <ButtonFavorite movie={data} />
+                  <Image src="/save.svg" width={30} height={30} alt="Save"/>
+                </div>
                 <div className={styles.trailer}>
                   <Link href={play_trailer} className={styles.link_trailer}>
                     <Image src="/play.svg" width={20} height={20} alt="Trailer"/>

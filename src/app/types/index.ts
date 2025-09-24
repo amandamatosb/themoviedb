@@ -8,6 +8,7 @@ export type Movie = {
   name?: string;
   first_air_date?: string;
   media_type: 'movie' | 'tv' | 'person';
+  tagline: string;
 };
 
 export type Genre = {

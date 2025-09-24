@@ -7,14 +7,14 @@ import MovieCard from 'app/components/MovieCard/MovieCard'
 import { Movie } from 'app/types'
 import { CarouselSkeleton } from 'app/components/MovieCard/CarouselSkeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Api } from 'app/hooks/Api'
+import { useApi } from 'app/hooks/useApi'
 
 type TrendTab = 'day' | 'week';
 
 export default function Trending(){
 
   const [timeWindow, setTimeWindow] = useState<TrendTab>('day');
-  const {data: movies, loading, error } = Api(`https://api.themoviedb.org/3/trending/all/${timeWindow}`);
+  const {data: movies, loading, error } = useApi(`https://api.themoviedb.org/3/trending/all/${timeWindow}`);
 
   if (error) return <div>{error}</div>;
 

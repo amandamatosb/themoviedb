@@ -1,0 +1,46 @@
+.fav {
+  background-color: #ededed;
+  padding: 2rem 3rem 5rem 3rem;
+  min-height: 80vh;
+}
+
+.image {
+  border-radius: 10px;
+  width: 130px;
+  height: auto;
+}
+
+.text {
+  h2 {
+    font-weight: bold;
+    font-size: large;
+  }
+  
+  h3 {
+    padding-left: 5px;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+     margin-bottom: 15px;
+     font-style: italic;
+     color: rgb(66, 66, 66)
+  }
+
+  width: 50vw;
+  min-width: 0;
+  
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: 3rem;  
+  margin-top: 3rem;
+}
+
+.title {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}

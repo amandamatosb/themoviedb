@@ -16,6 +16,7 @@ const Header = () => {
         <Link href='/tvshows'>TV Shows</Link>
         <Link href='/people'>People</Link>
         <Link href='/more'>More</Link>
+        <Link href='/favorites'>Favorites</Link>
       </nav>
     </header>
   )
