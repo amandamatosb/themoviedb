@@ -32,7 +32,7 @@
 
 .more {
     font-weight: bolder;
-    padding: 2rem 0rem 0rem 5rem;
+    padding: 1rem 0rem 2rem 5rem;
 }
 
 .more:hover {
@@ -67,4 +67,8 @@
     -webkit-line-clamp: 3;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.hr {
+    width: 90vw;
 }

@@ -5,8 +5,9 @@ import { MenuDetail } from 'app/components/DetailsMedia/MenuDetail/MenuDetail';
 import { Media } from 'app/components/DetailsMedia/Media/Media';
 import { Review } from 'app/components/DetailsMedia/Review/Review';
 import formatDate from 'app/utils';
-import { Api } from 'app/hooks/Api';
 import Credits from 'app/components/DetailsMedia/Credits/Credits';
+import VoteProgressBar from 'app/components/VoteProgressBar/VoteProgressBar';
+import Link from  'next/link';
 
 const key = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -32,6 +33,18 @@ export default async function detailPage ({ params } : { params : {id: string, m
     const data = await response.json();
 
     const background = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
+ 
+    const trailer_url = `${url}/videos`;
+
+    const response_trailer = await fetch(trailer_url, options);
+    if (!response_trailer.ok) {
+        throw new Error('Falha na resposta da API');
+    }
+    const trailer_data = await response_trailer.json();
+
+    const trailer = trailer_data.results.find((v: any) => v.type === 'Trailer' && v.site === 'YouTube');
+
+    const play_trailer = `https://www.youtube.com/watch?v=${trailer.key}`;
 
     return (
         <>
@@ -71,7 +84,27 @@ export default async function detailPage ({ params } : { params : {id: string, m
                 <div> {Math.floor(data.runtime / 60)}h {data.runtime % 60}m </div>}
               </div>
 
-              <h3 className={styles.vote}> {Math.floor(data.vote_average * 10)} </h3>
+              <div className={styles.progress}>
+                <div className={styles.circle}>
+                 < VoteProgressBar note={data.vote_average} />
+                </div>
+                <div>
+                    <div>User</div>
+                    <div>Score</div>
+                </div>
+            </div>
+
+              <div className={styles.buttons}>
+                <Image src="/list.svg" width={30} height={30} alt="List"/>
+                <Image src="/heart.svg" width={30} height={30} alt="Favorite"/>
+                <Image src="/save.svg" width={30} height={30} alt="Save"/>
+                <div className={styles.trailer}>
+                  <Link href={play_trailer} className={styles.link_trailer}>
+                    <Image src="/play.svg" width={20} height={20} alt="Trailer"/>
+                    Play Trailer
+                  </Link>
+                </div>
+              </div>
 
               <p className={styles.tagline}>{data.tagline}</p>
               <h3 className={styles.overview}>Overview</h3>
@@ -91,6 +124,7 @@ export default async function detailPage ({ params } : { params : {id: string, m
       <section className={styles.section_info}>
         <Review id={id} media_type={media_type} />
       </section>
+
 
       <section className={styles.section_info}>
         <Media id={id} media_type={media_type} />

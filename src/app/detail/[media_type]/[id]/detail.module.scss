@@ -88,3 +88,35 @@
     font-size: large;
     font-weight: bold;
 }
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px 10px 25px 10px;
+}
+
+.circle {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.trailer {
+    margin-left: 20px; 
+}
+
+.link_trailer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.link_trailer:hover {
+    color: #078bc7;
+}

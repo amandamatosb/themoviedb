@@ -44,6 +44,9 @@ export default async function Credits ({id, media_type} : {id: string; media_typ
                 </div>
                 ))} 
             </div>
+
+            <div className={styles.more}>Full Cast & Crew</div>
+            <hr />
             </div>
 
         );

@@ -40,4 +40,11 @@
     padding: 7px;
 }
 
+.more {
+    font-weight: bolder;
+    padding: 2rem 0rem 2rem 5rem;
+}
 
+.more:hover {
+    color: #929292;
+}

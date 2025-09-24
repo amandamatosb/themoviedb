@@ -130,6 +130,7 @@ export function Review ({id, media_type} : {id: string; media_type: string})
       </div>
     </div>
       <div className={styles.more}>Read All Reviews</div>
+      <hr className={styles.hr}/>
     </>
     );
 

@@ -44,7 +44,7 @@
   padding: 2rem 3rem 5rem 3rem;
 }
 
-.leaderbord {
+.leaderboard {
   background-color: #ededed;
   padding: 2rem 3rem 5rem 3rem;
 }
@@ -84,4 +84,33 @@
 .videocard:hover {
   color: #4c8099;
   gap: 10px;
+}
+
+.infoleaderboard {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.leaderinfo {
+  font-weight: bolder;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.progresscolor_red {
+  background: linear-gradient(to right, #fdbf70, #da3d63 );
+}
+
+.leaderboardcontainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem; 
 }

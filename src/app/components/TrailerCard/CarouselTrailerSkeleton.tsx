@@ -4,21 +4,13 @@ import TrailerSkeleton from './TrailerSkeleton'
 
 export const CarouselTrailerSkeleton = () => {
 
+  const skeletons = Array.from({ length: 12 })
+
   return (
     <div className={styles.moviecontainer}>
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
-        <TrailerSkeleton />
+        {skeletons.map((_, index) => (
+        <TrailerSkeleton key={index} />
+      ))}
     </div>
   )
 }

@@ -8,6 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from 'next/image'
 import Link from 'next/link'
 
+const key = process.env.NEXT_PUBLIC_API_KEY;
+
 type TrailerTab = 'popular' | 'streaming' | 'on-tv' | 'for-rent' | 'in-theater';
 
 export default function Trailer(){
@@ -51,7 +53,7 @@ export default function Trailer(){
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGMxYzFiZDU3MzY2NTgyNjNjMzc0MWFiZmY1NGJmNCIsIm5iZiI6MTc1NzUyNzg0Mi4wNTksInN1YiI6IjY4YzFiZjIyYjRiNDc0MDAwYzFmNjNkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-Ir2TNtVmhW7IZR00ChUh7Y_JeZoy7-V71jE61mLRio'
+          Authorization: `Bearer ${key}`
         }
       };
 
@@ -66,15 +68,8 @@ export default function Trailer(){
 
         const trailers = some.map(async (item: any) => {
           const trailer_url = `https://api.themoviedb.org/3/${type}/${item.id}/videos`;
-          const trailer_options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGMxYzFiZDU3MzY2NTgyNjNjMzc0MWFiZmY1NGJmNCIsIm5iZiI6MTc1NzUyNzg0Mi4wNTksInN1YiI6IjY4YzFiZjIyYjRiNDc0MDAwYzFmNjNkOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-Ir2TNtVmhW7IZR00ChUh7Y_JeZoy7-V71jE61mLRio'
-            }
-          };
 
-          const response_trailer = await fetch(trailer_url, trailer_options);
+          const response_trailer = await fetch(trailer_url, options);
           if (!response_trailer.ok) {
               throw new Error('Falha na resposta da API');
           }
@@ -89,8 +84,6 @@ export default function Trailer(){
 
         const final_trailer = (await Promise.all(trailers)).filter(Boolean);
         setResults(final_trailer);
-
-        console.log(final_trailer);
 
       }
 

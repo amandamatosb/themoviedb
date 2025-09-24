@@ -47,6 +47,7 @@ export default function Trending(){
                 poster_path={movie.poster_path}
                 release_date={movie.release_date || movie.first_air_date}
                 media_type={movie.media_type}
+                vote_average={movie.vote_average}
               />
             );
           })}

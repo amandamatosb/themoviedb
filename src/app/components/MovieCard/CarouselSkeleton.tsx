@@ -4,21 +4,13 @@ import MovieSkeleton from './MovieSkeleton'
 
 export const CarouselSkeleton = () => {
 
+  const skeletons = Array.from({ length: 12 })
+
   return (
     <div className={styles.moviecontainer}>
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
-        <MovieSkeleton />
+        {skeletons.map((_, index) => (
+        <MovieSkeleton key={index} />
+      ))}
     </div>
   )
 }
